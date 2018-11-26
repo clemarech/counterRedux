@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import { composeWithDevTools, devToolsEnhancer } from 'redux-devtools-extension';
+import LightContainer from './actions/LightContainer'
 
+import LightReducer from './reducer/LightReducer'
+import CounterReducer from './reducer/CounterReducer';
+import CounterComponent from './actions/CounterContainer';
 class App extends Component {
+
   render() {
+
+    const store = createStore(
+      CounterReducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
     return (
+      <Provider store={store} >
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>west coast</h1>
+        {/* <LightContainer /> */}
+        <CounterComponent />
       </div>
+      </Provider>
     );
   }
 }
